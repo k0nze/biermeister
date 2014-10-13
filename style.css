@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'helvetica-own';
+    font-weight: lighter;
+    font-style: normal;
+    /*src: url("https://denzfarid.googlecode.com/files/helveticaneue-webfont.ttf") format('truetype');*/
+    src: url("helveticaneue-webfont.ttf") format('truetype');
+}
+
+body {
+    font-family: "helvetica-own","helvetica","arial";
+    font-weight: lighter;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    height: 74px;
+    padding-top: 0px;
+    text-align: center; 
+    background-color: #5BA8FE;
+    color: #FFFFFF;
+}
+
+#header h1 {
+    margin-top: 18px;
+}
+
+h2, h3 {
+    color: #A0A0A0;
+}
+
+#contentWrapper {
+    margin-top: 100px;
+    color: #505050;
+    text-align: center;
+}
+
+#nodeTitle {
+    font-weight: bold;
+}
+
+#answerLeft, #answerRight {
+    color: black;
+    padding: 10px;
+    margin: 20px;
+    background-color: #D0D0D0;
+    border-radius: 10px;
+}
+
+#imprintLink {
+    margin-top: 60px;
+    text-align: center;
+}
+
+
+#imprintLink a {
+    color: #505050;
+    text-decoration: underlined;
+}
+
+
+#imprintLink a:HOVER {
+    color: #5BA8FE;
+}

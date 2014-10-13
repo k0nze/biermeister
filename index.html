@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
+        <title>Biermeister</title>
+        <script type="text/javascript" src="./jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+        <div id="javascript_error">
+            <span style="font-size:24pt;">Bitte aktivieren Sie JavaScript<br/></span>
+            <span style="font-size:16pt;">(Diese Webseite funktioniert nicht ohne JavaScript)</span>
+        </div>
+        <script type="text/javascript">
+            $("#javascript_error").remove();
+        </script>
+
+        <div id="header">
+            <h1>Biermeister</h1>
+        </div>
+
+        <div id="contentWrapper">
+
+        </div>
+
+        <div id="imprintLink">
+            <a href="http://konze.org/impressum">Impressum</a>
+        </div>
+
+        <script type="text/javascript">
+            /* 
+            JSON representation of the desicion tree
+            {
+                "leave" : true|false,
+                "nodeTitle" : "...",
+                "answerLeft" : "...",
+                "answerRight" : "...",
+                "subTreeLeft" : {...},
+                "subTreeRight" : {...}
+            }
+            */
+            var decisionTreeJSON = '{' +
+                '"leave" : false, ' +
+                '"nodeTitle" : "In welchem Gefäß befindet sich das Bier?", ' + 
+                '"answerLeft" : "Dose oder Plastikflasche", ' +
+                '"answerRight" : "Glasflasche", ' +
+                '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                '"subTreeRight" : ' + 
+                '{' +
+                    '"leave" : false, ' +
+                    '"nodeTitle" : "Wird für dieses Bier im Fernsehen geworben!", ' + 
+                    '"answerLeft" : "Ja", ' +
+                    '"answerRight" : "Nein", ' +
+                    '"subTreeLeft" : ' + 
+                    '{' +
+                        '"leave" : false, ' +
+                        '"nodeTitle" : "Handelt es sich um Kröstizer Schwarzbier?", ' + 
+                        '"answerLeft" : "Nein", ' +
+                        '"answerRight" : "Ja", ' +
+                        '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                        '"subTreeRight" : {"leave" : true, "nodeTitle" : "Kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }' + 
+                    '}, ' +
+                    '"subTreeRight" : ' +
+                    '{' +
+                        '"leave" : false, ' +
+                        '"nodeTitle" : "Stammt das Bier aus Mittel- oder Süddeutschland? (Baden-Württemberg, Bayern, Hessen, Rheinland-Pfalz, Saarland, Sachsen, Thüringen)", ' + 
+                        '"answerLeft" : "Nein", ' +
+                        '"answerRight" : "Ja", ' +
+                        '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                        '"subTreeRight" : ' + 
+                        '{' +
+                            '"leave" : false, ' +
+                            '"nodeTitle" : "Ist das Bier vermischt mit etwas?", ' + 
+                            '"answerLeft" : "Ja", ' +
+                            '"answerRight" : "Nein", ' +
+                            '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                            '"subTreeRight" : ' + 
+                            '{' +
+                                '"leave" : false, ' +
+                                '"nodeTitle" : "Ist der Aufdruck, hip, jung, cool und frisch? (siehe: OXX oder V+)", ' + 
+                                '"answerLeft" : "Ja", ' +
+                                '"answerRight" : "Nein", ' +
+                                '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                                '"subTreeRight" : ' + 
+                                '{' +
+                                    '"leave" : false, ' +
+                                    '"nodeTitle" : "Handelt es sich um Weizenbier?", ' + 
+                                    '"answerLeft" : "Ja", ' +
+                                    '"answerRight" : "Nein", ' +
+                                    '"subTreeLeft" : ' + 
+                                    '{' +
+                                        '"leave" : false, ' +
+                                        '"nodeTitle" : "Sind Weizengläser zum trinken vorhanden?", ' + 
+                                        '"answerLeft" : "Nein", ' +
+                                        '"answerRight" : "Ja", ' +
+                                        '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Nicht kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                                        '"subTreeRight" : {"leave" : true, "nodeTitle" : "Kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null } ' + 
+                                    '},' +
+                                    '"subTreeRight" : ' + 
+                                    '{' +
+                                        '"leave" : false, ' +
+                                        '"nodeTitle" : "Ist das Bier von einer der folgenden Marken: Rothaus, Wulle, Oettinger, Ratskrone?", ' + 
+                                        '"answerLeft" : "Ja", ' +
+                                        '"answerRight" : "Nein", ' +
+                                        '"subTreeLeft" : {"leave" : true, "nodeTitle" : "Kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null }, ' + 
+                                        '"subTreeRight" : {"leave" : true, "nodeTitle" : "Nicht Kaufen!", "answerLeft" : null, "answerRight" : null, "subTreeLeft" : null, "subTreeRight" : null } ' + 
+                                    '}' +
+                                '}' +
+                            '}' +
+                        '}' +
+                    '}' +
+                '}' +
+            '}';
+
+            var decisionTree = JSON.parse(decisionTreeJSON);
+            console.log(decisionTree.nodeTitle);
+
+            var level = 0;
+            var currentNode = decisionTree;
+
+            /* current node is root tree */
+            if(level == 0) {
+                $('#contentWrapper').append(
+                    '<h2>Willkommen bei Biermeister</h2>' + 
+                    '<p id="desription">Beantworte die ein paar Fragen um zu erfahren ob du das Bier in deiner Hand kaufen kannst</p>' + 
+                    '</br>'
+                );                 
+            }
+
+            if(currentNode != null) {
+                $('#contentWrapper').append(
+                    '<p id="nodeTitle">' + currentNode.nodeTitle + '</p>' +
+                    '<div id="answerLeft">' + currentNode.answerLeft + '</div>' + 
+                    '<div id="answerRight">' + currentNode.answerRight + '</div>'
+                );
+            }
+        </script>
+    </body>
+</html>
+
