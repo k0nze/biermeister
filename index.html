@@ -22,6 +22,10 @@
 
         </div>
 
+        <div id="removeButtonWrapper">
+
+        </div>
+
         <div id="imprintLink">
             <a href="http://konze.org/impressum">Impressum</a>
         </div>
@@ -110,6 +114,42 @@
                     '}' +
                 '}' +
             '}';
+           
+            /* removes welcome text ans desription */
+            function removeWelcomeText() {
+                $('#welcome').remove();
+                $('#description').remove();
+            }
+
+            /* removes the HTML code of the current node */
+            function removeCurrentNode() {
+                $('#nodeTitle').remove();
+                $('#answerLeft').remove();
+                $('#answerRight').remove();
+            }
+
+            /* inserts the HTML code for a node */
+            function showNode(nodeTitleStr, answerLeftStr, answerRightStr) {
+                $('#contentWrapper').append(
+                    '<p id="nodeTitle">' + nodeTitleStr + '</p>' +
+                    '<div id="answerLeft">' + answerLeftStr + '</div>' + 
+                    '<div id="answerRight">' + answerRightStr + '</div>'
+                );
+            }
+
+            /* inserts the HTML code for a leave */
+            function showLeave(nodeTitleStr) {
+                $('#contentWrapper').append(
+                    '<p id="leaveTitle">' + nodeTitleStr + '<p>'
+                );
+            }
+
+            /* inserts the restart button */
+            function showRestartButton() {
+                $('#removeButtonWrapper').append(
+                    '<div id="restartButton">Von vorne beginnen</div>'
+                );
+            }
 
             var decisionTree = JSON.parse(decisionTreeJSON);
             console.log(decisionTree.nodeTitle);
@@ -120,19 +160,64 @@
             /* current node is root tree */
             if(level == 0) {
                 $('#contentWrapper').append(
-                    '<h2>Willkommen bei Biermeister</h2>' + 
-                    '<p id="desription">Beantworte die ein paar Fragen um zu erfahren ob du das Bier in deiner Hand kaufen kannst</p>' + 
+                    '<h2 id="welcome">Willkommen bei Biermeister</h2>' + 
+                    '<p id="description">Beantworte die ein paar Fragen um zu erfahren ob du das Bier in deiner Hand kaufen kannst</p>' + 
                     '</br>'
                 );                 
             }
 
             if(currentNode != null) {
-                $('#contentWrapper').append(
-                    '<p id="nodeTitle">' + currentNode.nodeTitle + '</p>' +
-                    '<div id="answerLeft">' + currentNode.answerLeft + '</div>' + 
-                    '<div id="answerRight">' + currentNode.answerRight + '</div>'
-                );
+                showNode(currentNode.nodeTitle, currentNode.answerLeft, currentNode.answerRight);
             }
+
+            /* left (upper) button was pressed */
+            $('body').on('click', '#answerLeft', function(e) {
+                console.log("left");
+
+                if(level == 0) {
+                    removeWelcomeText();
+                    showRestartButton();
+                }
+
+                removeCurrentNode();
+
+                currentNode = currentNode.subTreeLeft
+
+                level++;
+
+                if(currentNode.leave) {
+                    showLeave(currentNode.nodeTitle);
+                } else {
+                    showNode(currentNode.nodeTitle, currentNode.answerLeft, currentNode.answerRight);
+                }
+            });
+
+            /* left (lower) button was pressed */
+            $('body').on('click', '#answerRight', function(e) {
+                console.log("right");
+
+                if(level == 0) {
+                    removeWelcomeText();
+                    showRestartButton();
+                }
+
+                removeCurrentNode();
+
+                currentNode = currentNode.subTreeRight
+
+                level++;
+
+                if(currentNode.leave) {
+                    showLeave(currentNode.nodeTitle);
+                } else {
+                    showNode(currentNode.nodeTitle, currentNode.answerLeft, currentNode.answerRight);
+                }
+            });
+
+           /* restart button was pressed */
+            $('body').on('click', '#restartButton', function(e) {
+                location.reload();    
+            });
         </script>
     </body>
 </html>
