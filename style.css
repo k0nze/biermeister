@@ -50,26 +50,25 @@ h2, h3 {
     margin: 20px;
     background-color: #D0D0D0;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #answerLeft:HOVER, #answerRight:HOVER {
     color: white;
     background-color: #999999;
-    cursor: pointer;
 }
 
 #restartButton {
-    color: #999999;
+    color: #777777;
     padding: 10px;
     margin: 20px;
     background-color: #EEEEEE;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #restartButton:HOVER {
-    color: white;
     background-color: #DDDDDD;
-    cursor: pointer;
 }
 
 #imprintLink {
